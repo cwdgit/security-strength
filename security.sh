@@ -38,7 +38,14 @@ sed -i 's#auth        required      pam_env.so#auth        required      pam_env
 
 sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=6 unlock_time=300#' /etc/pam.d/sshd
 
+#sed -i 's#PASS_MAX_DAYS   99999#PASS_MAX_DAYS   90#' /etc/login.defs
+#sed -i 's#PASS_MIN_DAYS   0#PASS_MAX_DAYS   60#' /etc/login.defs
+#sed -i 's#PASS_MIN_LEN    5#PASS_MIN_LEN    10#' /etc/login.defs
+#sed -i 's#PASS_WARN_AGE   7#PASS_WARN_AGE   10#' /etc/login.defs
 
+#sed -i 's#password    sufficient pam_unix.so sha512 shadow nullok try_first_pass use_authtok#password    sufficient pam_unix.so sha512 shadow nullok try_first_pass use_authtok remember=5#'
+
+#echo "password requisite pam_cracklib.so retry=3 difok=3 minlen=10 ucredit=-1 lcredit=-2 dcredit=-1 ocredit=-1" >> /etc/pam.d/system-auth
 
 # system timeout 5 minite auto logout
 echo "TMOUT=300" >>/etc/profile
