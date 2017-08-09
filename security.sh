@@ -34,9 +34,11 @@ chattr +i /etc/gshadow
 cp /etc/pam.d/system-auth /etc/pam.d/system-auth.bak
 cp /etc/pam.d/sshd /etc/pam.d/sshd.bak
 
-sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=3 unlock_time=300\nauth           required     /lib/security/$ISA/pam_tally.so onerr=fail deny=3 unlock_time=300#' /etc/pam.d/system-auth
+sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=6 unlock_time=300#' /etc/pam.d/system-auth
 
-sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=3 unlock_time=300\nauth           required     /lib/security/$ISA/pam_tally.so onerr=fail deny=3 unlock_time=300#' /etc/pam.d/sshd
+sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=6 unlock_time=300#' /etc/pam.d/sshd
+
+
 
 # system timeout 5 minite auto logout
 echo "TMOUT=300" >>/etc/profile
@@ -52,8 +54,8 @@ source /etc/profile
 echo "net.ipv4.tcp_syncookies=1" >> /etc/sysctl.conf
 
 sysctl -p # exec sysctl.conf enable
-# optimizer sshd_config
 
+# optimizer sshd_config
 sed -i "s/#MaxAuthTries 6/MaxAuthTries 6/" /etc/ssh/sshd_config
 sed -i  "s/#UseDNS yes/UseDNS no/" /etc/ssh/sshd_config
 
