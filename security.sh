@@ -34,10 +34,14 @@ chattr +i /etc/gshadow
 cp /etc/pam.d/system-auth /etc/pam.d/system-auth.bak
 cp /etc/pam.d/sshd /etc/pam.d/sshd.bak
 #设置终端登录限制
-sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally.so  onerr=fail deny=6 unlock_time=300#' /etc/pam.d/system-auth
-#设置ssh限制
+sed -i 's#auth        required      pam_env.so#auth        required      pam_env.so\nauth       required       pam_tally2.so  onerr=fail deny=6 even_deny_root unlock_time=300#' /etc/pam.d/system-auth
 
-#禁止使用旧密码
+
+#设置ssh限制
+echo "auth        required      pam_tally2.so onerr=fail deny=3 even_deny_root  unlock_time=300" >> /etc/pam.d/system-auth
+
+
+#禁止使用旧密码(root用户没有限制)
 sed -i 's#password    sufficient pam_unix.so sha512 shadow nullok try_first_pass use_authtok#password    sufficient pam_unix.so sha512 shadow nullok try_first_pass use_authtok remember=5#' /etc/pam.d/system-auth
 #密码复杂度设置
 sed -i 's#password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=#password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=\npassword requisite pam_cracklib.so retry=3 difok=3 minlen=10 ucredit=-1 lcredit=-2 dcredit=-1 ocredit=-1 enforce_for_root#' /etc/pam.d/system-auth
