@@ -75,7 +75,7 @@ ssh连接次数限制
 sed -i "s/#MaxAuthTries 6/MaxAuthTries 6/" /etc/ssh/sshd_config
 sed -i  "s/#UseDNS yes/UseDNS no/" /etc/ssh/sshd_config
 ```
-
+***
 md5校验重要命令，在被攻击后可快速定位，是否有重要命令被删（添加了常规命令）
  
 ```
@@ -116,3 +116,7 @@ do
 done
 rm -f list
 ```
+## 密码限制验证
+ 
+长度验证
+
