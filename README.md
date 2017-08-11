@@ -116,12 +116,17 @@ do
 done
 rm -f list
 ```
+***
 ## 密码限制验证
- 
-长度验证
- 
-密码重复验证
- 
-密码复杂度验证
- 
-历史纪录验证
+
+![](https://github.com/cwdgit/security-strength/blob/master/picture/1.png)
+***
+
+![](https://github.com/cwdgit/security-strength/blob/master/picture/2.png)
+*** 
+
+![](https://github.com/cwdgit/security-strength/blob/master/picture/3.png)
+***
+
+![](https://github.com/cwdgit/security-strength/blob/master/picture/4.png)
+***
